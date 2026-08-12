@@ -23,9 +23,9 @@ public class DoorTrigger : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Player")
+        if (other.tag == "Player")
         {
-            if(openTimer < openDelay)
+            if (openTimer < openDelay)
             {
                 openTimer += Time.deltaTime;
             }
@@ -39,10 +39,10 @@ public class DoorTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.tag == "Player")
+        if (other.tag == "Player")
         {
             animator.SetBool("Open", false);
             doorRenderer.material.color = closedColor;
-        }    
+        }
     }
 }

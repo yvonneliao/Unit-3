@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float groundedDistance = 0.07f;
 
-    [SerializeField] private float interactDistance = 1.0f;
+    [SerializeField] private float interactionDistance = 1.0f;
 
     private float xRotation = 0;
     private float yRotation = 0;
@@ -68,6 +68,7 @@ public class Player : MonoBehaviour
 
     private bool wasUsingCharacterController = false;
     private ISelectable selectedObject;
+
 
     private void Awake()
     {
@@ -301,17 +302,17 @@ public class Player : MonoBehaviour
     {
         if(interactInput)
         {
-            if(selectedObject == null)
+            if (selectedObject == null)
             {
-                RaycastHit hitinfo;
+                RaycastHit hitInfo;
                 Ray interactionRay = new Ray(camera.position, camera.forward);
-                if(Physics.Raycast(interactionRay, out hitinfo, interactDistance, LayerMask.GetMask("Selectable")))
+                if (Physics.Raycast(interactionRay, out hitInfo, interactionDistance, LayerMask.GetMask("Selectable")))
                 {
-                    selectedObject = hitinfo.transform.GetComponent<ISelectable>();
-                    if(selectedObject != null)
+                    selectedObject = hitInfo.transform.GetComponent<ISelectable>();
+                    if (selectedObject != null)
                     {
-                        selectedObject.OnPickup();
-                        if(selectedObject.ShouldPickup())
+                        selectedObject.OnInteract();
+                        if (selectedObject.ShouldPickup())
                         {
                             selectedObject.OnPickup();
                             selectedObject.GetTransform().SetParent(pickupPivot);
@@ -323,12 +324,13 @@ public class Player : MonoBehaviour
                             selectedObject = null;
                         }
                     }
-
                 }
-                else
-                {
-                    selectedObject = null;
-                }
+            }
+            else
+            {
+                selectedObject.OnPutDown();
+                selectedObject.GetTransform().SetParent(null);
+                selectedObject = null;
             }
         }
     }

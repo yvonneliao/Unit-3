@@ -10,15 +10,17 @@ public class PickupCube : MonoBehaviour, ISelectable
         rigidbody = GetComponent<Rigidbody>();
     }
 
-
     public bool ShouldPickup()
     {
         return true;
     }
 
+    public void OnInteract()
+    { }
+
     public void OnPickup()
     {
-        if(rigidbody != null)
+        if (rigidbody != null)
         {
             wasKinematic = rigidbody.isKinematic;
             rigidbody.isKinematic = true;
@@ -27,11 +29,10 @@ public class PickupCube : MonoBehaviour, ISelectable
 
     public void OnPutDown()
     {
-        if(rigidbody != null)
+        if (rigidbody != null)
         {
             rigidbody.isKinematic = wasKinematic;
         }
-
     }
 
     public Transform GetTransform()
@@ -42,10 +43,5 @@ public class PickupCube : MonoBehaviour, ISelectable
     public string GetSelectionText()
     {
         return "";
-    }
-
-    public void OnInteract()
-    {
-        throw new System.NotImplementedException();
     }
 }
