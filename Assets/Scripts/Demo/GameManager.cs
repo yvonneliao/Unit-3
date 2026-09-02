@@ -22,7 +22,9 @@ public class GameManager : Singleton<GameManager>
 
     void Start()
     {
-        
+        // initial testing of if systems work
+        // LoadScene("SampleScene");
+        // ChangeGameState(DemoGameState.Intro);
     }
 
     #region Update
@@ -59,7 +61,7 @@ public class GameManager : Singleton<GameManager>
 
     private void IntroUpdate()
     {
-        // Do intro stuff
+        Debug.Log("Intro Update");
     }
 
     private void PlayUpdate()
