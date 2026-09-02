@@ -4,13 +4,13 @@ using UnityEngine.SceneManagement;
 
 public enum DemoGameState
 {
-    Setup,      // initial setup
-    Intro,      // intro cutscene
+    Setup,      // Initial setup
+    Intro,      // Intro cutscene
     Play,       // Playing the game
     GameOver,   // End cutscene or game over
     End,        // Teardown
 }
-
+    
 public class GameManager : Singleton<GameManager>
 {
     private DemoGameState _gameState;
@@ -18,13 +18,11 @@ public class GameManager : Singleton<GameManager>
     { get { return _gameState; } }
 
     public UnityEvent<DemoGameState, DemoGameState> OnGameStateChanged = new UnityEvent<DemoGameState, DemoGameState>();
-
+    
 
     void Start()
     {
-        // initial testing of if systems work
-        // LoadScene("SampleScene");
-        // ChangeGameState(DemoGameState.Intro);
+        
     }
 
     #region Update
@@ -49,34 +47,34 @@ public class GameManager : Singleton<GameManager>
                 EndUpdate();
                 break;
             default:
-                Debug.LogError("Error! Tried to run updated in an invald game state!");
+                Debug.LogError("Error! Tried to run update in an invalid game state!");
                 break;
         }
     }
 
     private void SetupUpdate()
     {
-        // Do setup stuff
+
     }
 
     private void IntroUpdate()
     {
-        Debug.Log("Intro Update");
+
     }
 
     private void PlayUpdate()
     {
-        // Do play stuff
+
     }
 
     private void GameOverUpdate()
     {
-        // Do game over stuff
+
     }
 
     private void EndUpdate()
     {
-        // Do end stuff
+
     }
 
     #endregion
@@ -85,16 +83,16 @@ public class GameManager : Singleton<GameManager>
     {
         DemoGameState previousState = _gameState;
         _gameState = targetState;
-        OnGameStateChanged.Invoke(previousState, _gameState);
+        OnGameStateChanged?.Invoke(previousState, _gameState);
     }
-    
+
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
     }
 
-    /* public DemoGameState GetGameState()
+    /*public DemoGameState GetGameState()
     {
         return _gameState;
-    } */
+    }*/
 }
